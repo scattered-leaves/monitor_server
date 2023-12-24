@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 
 public class Main {
@@ -60,7 +61,7 @@ public class Main {
             msg = "内存到达警戒：98%！！！";
         } else if (sl >= 95) {
             msg = "内存到达警戒：95%！！";
-        } else if (sl >= 80) {
+        } else if (sl >= 90) {
             msg = "内存到达警戒：90%！";
         } else return;
         System.out.println(msg);
@@ -101,7 +102,7 @@ public class Main {
                         """.formatted(msg, mx, no, sy, sl))).build();
         try {
             //发送http请求
-            HttpClient.newHttpClient().send(hr, null);
+            HttpClient.newHttpClient().send(hr, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
             e.printStackTrace();
         }
